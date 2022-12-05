@@ -54,7 +54,41 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
-            const Text('hoge')
+            const Text('hoge'),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Column(
+                children: [
+                  CustomPaint(
+                    // size: const Size(20, 20),
+                    painter: Triangle(Colors.green),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[900],
+                      borderRadius: BorderRadius.circular(
+                        100,
+                      ),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 10,
+                          offset: Offset(0, 10),
+                        ),
+                      ],
+                    ),
+                    child: const Text(
+                      'text だよ',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -64,5 +98,25 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+}
+
+class Triangle extends CustomPainter {
+  Triangle(this.bgColor);
+  final Color bgColor;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()..color = bgColor;
+    final path = Path()
+      ..lineTo(-20, 20)
+      ..lineTo(0, -20)
+      ..lineTo(20, 20);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }
