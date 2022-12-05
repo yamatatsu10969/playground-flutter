@@ -1,0 +1,16 @@
+# 変更がかかるファイルを定義
+targets:
+  $default:
+    builders:
+      json_serializable:
+        options:
+          checked: true
+          explicit_to_json: true # ネストしたモデルを toJson できるようにする https://github.com/rrousselGit/freezed/issues/86#issuecomment-593936459
+      source_gen|combining_builder: # lib/**/*.g.dart に lint を無視する記述を追加する https://twitter.com/_mono/status/1536907414490222593
+        options:
+          ignore_for_file:
+            - type=lint
+            - implicit_dynamic_parameter
+            - implicit_dynamic_type
+            - implicit_dynamic_method
+            - strict_raw_type
