@@ -9,6 +9,13 @@
       "request": "launch",
       "type": "dart"
     },
+    // go_router_sample.dart を動かす
+    {
+      "name": "go_router_sample",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/go_router_sample.dart"
+    },
     {
       "name": "playground (profile mode)",
       "request": "launch",
