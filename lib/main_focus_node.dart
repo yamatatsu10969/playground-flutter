@@ -37,26 +37,29 @@ class MyHomePage extends HookWidget {
     focusNode.addListener(() {
       print('focusNode: ${focusNode.hasFocus}');
     });
-    return GestureDetector(
-      onTap: focusNode.unfocus,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
-              ),
-              Focus(
-                onFocusChange: (value) => print('Focus: $value'),
-                child: TextFormField(
-                  focusNode: focusNode,
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: GestureDetector(
+        onTap: focusNode.unfocus,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(title),
+          ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'You have pushed the button this many times:',
                 ),
-              ),
-            ],
+                Focus(
+                  onFocusChange: (value) => print('Focus: $value'),
+                  child: TextFormField(
+                    focusNode: focusNode,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
