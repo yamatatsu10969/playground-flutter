@@ -59,6 +59,9 @@ class _MyHomePageState extends State<MyHomePage> {
         firstDay: DateTime(2010),
         lastDay: DateTime(2030),
         startingDayOfWeek: StartingDayOfWeek.monday,
+        holidayPredicate: (day) {
+          return day.weekday == DateTime.sunday;
+        },
         headerStyle: HeaderStyle(
           formatButtonVisible: false,
           titleCentered: true,
@@ -84,6 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         calendarStyle: const CalendarStyle(
           cellMargin: EdgeInsets.zero,
+          // canMarkersOverflow: false,
           tableBorder: TableBorder(
             horizontalInside: BorderSide(color: Colors.grey, width: 0.5),
             verticalInside: BorderSide(color: Colors.grey, width: 0.5),
@@ -99,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Colors.grey,
           ),
           defaultBuilder: defaultCalendarBuilder,
-          holidayBuilder: defaultCalendarBuilder,
+          holidayBuilder: holidayCalendarBuilder,
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -117,11 +121,29 @@ class _MyHomePageState extends State<MyHomePage> {
   }) {
     return Container(
       alignment: Alignment.topLeft,
-      margin: const EdgeInsets.all(4),
+      padding: const EdgeInsets.all(4),
       child: Text(
         day.day.toString(),
         style: TextStyle(
-          color: color ?? Colors.black87,
+          color: color ?? Colors.black54,
+        ),
+      ),
+    );
+  }
+
+  Widget? holidayCalendarBuilder(
+    BuildContext context,
+    DateTime day,
+    DateTime focusedDay,
+  ) {
+    return Container(
+      alignment: Alignment.topLeft,
+      padding: const EdgeInsets.all(4),
+      color: Colors.red[100],
+      child: Text(
+        day.day.toString(),
+        style: const TextStyle(
+          color: Colors.red,
         ),
       ),
     );
