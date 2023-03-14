@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           child: child!,
         );
       },
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Table Calendar'),
     );
   }
 }
@@ -136,7 +136,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 },
                 itemCount: events.length,
-                // shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
               ),
             );
