@@ -62,6 +62,16 @@ class _MyHomePageState extends State<MyHomePage> {
         holidayPredicate: (day) {
           return day.weekday == DateTime.sunday;
         },
+        eventLoader: (day) {
+          return [
+            _WorkEvent(day, 'WorkWork'),
+            _HobbyEvent(day, 'Hobby'),
+            _WorkEvent(day, 'WorkWork'),
+            _HobbyEvent(day, 'Hobby'),
+            if (day.day.isEven) _HobbyEvent(day, 'Hobby'),
+            // _HobbyEvent(day, 'Hobby'),
+          ];
+        },
         headerStyle: HeaderStyle(
           formatButtonVisible: false,
           titleCentered: true,
@@ -87,7 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         calendarStyle: const CalendarStyle(
           cellMargin: EdgeInsets.zero,
-          // canMarkersOverflow: false,
+          canMarkersOverflow: false,
+          markerSize: 0.5,
           tableBorder: TableBorder(
             horizontalInside: BorderSide(color: Colors.grey, width: 0.5),
             verticalInside: BorderSide(color: Colors.grey, width: 0.5),
@@ -104,11 +115,33 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           defaultBuilder: defaultCalendarBuilder,
           holidayBuilder: holidayCalendarBuilder,
+          markerBuilder: (context, day, events) {
+            // Column だと canMarkersOverflow が効かずに overflow する
+            return Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: events[index].backgroundColor,
+                    ),
+                    padding: const EdgeInsets.all(2),
+                    margin: const EdgeInsets.all(2).copyWith(bottom: 0),
+                    child: Text(
+                      events[index].title,
+                      style: const TextStyle(color: Colors.white),
+                      maxLines: 1,
+                    ),
+                  );
+                },
+                itemCount: events.length,
+                // shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+              ),
+            );
+          },
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
       ),
     );
   }
