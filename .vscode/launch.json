@@ -10,6 +10,12 @@
       "type": "dart"
     },
     {
+      "name": "table_calendar",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/table_calendar.dart"
+    },
+    {
       "name": "go_router_sample",
       "request": "launch",
       "type": "dart",
