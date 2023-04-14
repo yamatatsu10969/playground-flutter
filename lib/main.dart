@@ -88,6 +88,53 @@ class _MyHomePageState extends State<MyHomePage> {
                   hintText: 'hoge',
                 ),
               ),
+              ElevatedButton.icon(
+                onPressed: () {
+                  // show modal
+                  showModalBottomSheet<void>(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (context) {
+                      return ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height * 0.8,
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 200,
+                              color: Colors.red,
+                              child: const Center(
+                                child: Text('This is Modal'),
+                              ),
+                            ),
+                            Expanded(
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 1000,
+                                      color: Colors.white,
+                                      child: const Center(
+                                        child: Text('This is Modal'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
+                icon: const Icon(Icons.add),
+                label: const Text('modal bottom sheet'),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.red),
+                ),
+              ),
               const Text('hoge'),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
